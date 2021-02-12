@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,19 +13,11 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://movie-match.com/">
-        Movie Match
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   avatar: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(0),
     backgroundColor: "#546e7a",
   },
   form: {
@@ -54,6 +47,14 @@ const useStyles = makeStyles((theme) => ({
 
 function SignUp() {
   const classes = useStyles();
+
+  const [selectedDate, setSelectedDate] = useState(
+    new Date(Date().toLocaleString())
+  );
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -115,6 +116,22 @@ function SignUp() {
                 type="password"
               />
             </Grid>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <Grid item xs={12} container direction="column" justify="flex">
+                <KeyboardDatePicker
+                  id="dateOfBirth"
+                  label="Date of birth"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  variant="inline"
+                  format="dd/MM/yyyy"
+                  margin="normal"
+                  KeyboardButtonProps={{
+                    "aria-label": "change date",
+                  }}
+                />
+              </Grid>
+            </MuiPickersUtilsProvider>
             <Grid item xs={12}>
               <TextField
                 autoComplete="mobilenumber"
@@ -193,6 +210,19 @@ function SignUp() {
         <Copyright />
       </Box>
     </Container>
+  );
+}
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {"Copyright © "}
+      <Link color="inherit" href="https://movie-match.com/">
+        Movie Match
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
   );
 }
 
