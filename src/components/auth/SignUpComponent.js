@@ -1,5 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import axios from "axios";
+// import { signUp } from "./APIs/Endpoints";
+
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -30,6 +33,10 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(0),
     backgroundColor: "#546e7a",
   },
+  date: {
+    color: "red",
+    backgroundColor: "#546e7a",
+  },
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(4),
@@ -48,12 +55,43 @@ const useStyles = makeStyles((theme) => ({
 function SignUp() {
   const classes = useStyles();
 
-  const [selectedDate, setSelectedDate] = useState(
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    mobileNumber: "",
+    addressLine: "",
+    city: "",
+    country: "",
+  });
+
+  const [dateOfBirth, setDateOfBirth] = useState(
     new Date(Date().toLocaleString())
   );
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
+  function handleChange(event) {
+    // event.persist();
+    setUser((user) => ({ ...user, [event.target.name]: event.target.value }));
+  }
+
+  const handleSignUp = (event) => {
+    event.preventDefault();
+
+    axios
+      .post(
+        "http://localhost:8080/api/v1/registration",
+        {
+          user,
+        },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        console.log("registration response:", response);
+      })
+      .catch((error) => {
+        console.log("registration error: ", error);
+      });
   };
 
   return (
@@ -78,6 +116,8 @@ function SignUp() {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                value={user.firstName}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -90,6 +130,8 @@ function SignUp() {
                 label="Last Name"
                 name="lastName"
                 type="lastName"
+                value={user.lastName}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -102,6 +144,8 @@ function SignUp() {
                 name="email"
                 label="Email"
                 type="email"
+                value={user.email}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -114,15 +158,22 @@ function SignUp() {
                 name="password"
                 label="Password"
                 type="password"
+                value={user.password}
+                onChange={handleChange}
               />
             </Grid>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <Grid item xs={12} container direction="column" justify="flex">
+              <Grid item xs={12} container direction="column" justify="center">
                 <KeyboardDatePicker
+                  // className={classes.datePicker}
                   id="dateOfBirth"
+                  name="dateOfBirth"
                   label="Date of birth"
-                  value={selectedDate}
-                  onChange={handleDateChange}
+                  required
+                  value={dateOfBirth}
+                  onChange={(val) => {
+                    setDateOfBirth(val);
+                  }}
                   variant="inline"
                   format="dd/MM/yyyy"
                   margin="normal"
@@ -142,6 +193,8 @@ function SignUp() {
                 name="mobileNumber"
                 label="Mobile Number"
                 type="mobileNumber"
+                value={user.mobileNumber}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -154,6 +207,8 @@ function SignUp() {
                 name="addressLine"
                 label="Address Line"
                 type="addressLine"
+                value={user.addressLine}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -166,6 +221,8 @@ function SignUp() {
                 name="city"
                 label="City"
                 type="city"
+                value={user.city}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -178,6 +235,8 @@ function SignUp() {
                 name="country"
                 label="Country"
                 type="country"
+                value={user.country}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -190,10 +249,12 @@ function SignUp() {
           <Button
             className={classes.submit}
             id="signup"
+            name="signup"
             type="signup"
             fullWidth
             variant="contained"
             color="primary"
+            onClick={handleSignUp}
           >
             Sign Up
           </Button>
