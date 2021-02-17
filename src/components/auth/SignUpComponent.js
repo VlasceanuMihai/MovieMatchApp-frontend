@@ -1,4 +1,8 @@
 import React from "react";
+import { useState } from "react";
+import axios from "axios";
+// import { signUp } from "./APIs/Endpoints";
+
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,19 +16,11 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://movie-match.com/">
-        Movie Match
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,7 +30,11 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   avatar: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(0),
+    backgroundColor: "#546e7a",
+  },
+  date: {
+    color: "red",
     backgroundColor: "#546e7a",
   },
   form: {
@@ -54,6 +54,45 @@ const useStyles = makeStyles((theme) => ({
 
 function SignUp() {
   const classes = useStyles();
+
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    mobileNumber: "",
+    addressLine: "",
+    city: "",
+    country: "",
+  });
+
+  const [dateOfBirth, setDateOfBirth] = useState(
+    new Date(Date().toLocaleString())
+  );
+
+  function handleChange(event) {
+    // event.persist();
+    setUser((user) => ({ ...user, [event.target.name]: event.target.value }));
+  }
+
+  const handleSignUp = (event) => {
+    event.preventDefault();
+
+    axios
+      .post(
+        "http://localhost:8080/api/v1/registration",
+        {
+          user,
+        },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        console.log("registration response:", response);
+      })
+      .catch((error) => {
+        console.log("registration error: ", error);
+      });
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -77,6 +116,8 @@ function SignUp() {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                value={user.firstName}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -89,6 +130,8 @@ function SignUp() {
                 label="Last Name"
                 name="lastName"
                 type="lastName"
+                value={user.lastName}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -101,6 +144,8 @@ function SignUp() {
                 name="email"
                 label="Email"
                 type="email"
+                value={user.email}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -113,8 +158,31 @@ function SignUp() {
                 name="password"
                 label="Password"
                 type="password"
+                value={user.password}
+                onChange={handleChange}
               />
             </Grid>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <Grid item xs={12} container direction="column" justify="center">
+                <KeyboardDatePicker
+                  // className={classes.datePicker}
+                  id="dateOfBirth"
+                  name="dateOfBirth"
+                  label="Date of birth"
+                  required
+                  value={dateOfBirth}
+                  onChange={(val) => {
+                    setDateOfBirth(val);
+                  }}
+                  variant="inline"
+                  format="dd/MM/yyyy"
+                  margin="normal"
+                  KeyboardButtonProps={{
+                    "aria-label": "change date",
+                  }}
+                />
+              </Grid>
+            </MuiPickersUtilsProvider>
             <Grid item xs={12}>
               <TextField
                 autoComplete="mobilenumber"
@@ -125,6 +193,8 @@ function SignUp() {
                 name="mobileNumber"
                 label="Mobile Number"
                 type="mobileNumber"
+                value={user.mobileNumber}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -137,6 +207,8 @@ function SignUp() {
                 name="addressLine"
                 label="Address Line"
                 type="addressLine"
+                value={user.addressLine}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -149,6 +221,8 @@ function SignUp() {
                 name="city"
                 label="City"
                 type="city"
+                value={user.city}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -161,6 +235,8 @@ function SignUp() {
                 name="country"
                 label="Country"
                 type="country"
+                value={user.country}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -173,10 +249,12 @@ function SignUp() {
           <Button
             className={classes.submit}
             id="signup"
+            name="signup"
             type="signup"
             fullWidth
             variant="contained"
             color="primary"
+            onClick={handleSignUp}
           >
             Sign Up
           </Button>
@@ -193,6 +271,19 @@ function SignUp() {
         <Copyright />
       </Box>
     </Container>
+  );
+}
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {"Copyright © "}
+      <Link color="inherit" href="https://movie-match.com/">
+        Movie Match
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
   );
 }
 
