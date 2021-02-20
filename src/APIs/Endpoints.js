@@ -4,4 +4,5 @@ import axios from "axios";
 export const BASE_API = "http://localhost:8080";
 
 // Sign-up API
-export const signUp = () => `${BASE_API}/api/v1/registration`;
+export const signUpApi = (data) =>
+  axios.post(`${BASE_API}/api/v1/registration`, data);

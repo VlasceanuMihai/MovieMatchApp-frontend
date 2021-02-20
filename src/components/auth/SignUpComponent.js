@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import axios from "axios";
-// import { signUp } from "./APIs/Endpoints";
+import { signUpApi } from "../../APIs/Endpoints";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -71,27 +70,42 @@ function SignUp() {
   );
 
   function handleChange(event) {
-    // event.persist();
+    event.persist();
     setUser((user) => ({ ...user, [event.target.name]: event.target.value }));
   }
 
   const handleSignUp = (event) => {
     event.preventDefault();
-
-    axios
-      .post(
-        "http://localhost:8080/api/v1/registration",
-        {
-          user,
-        },
-        { withCredentials: true }
-      )
+    signUpApi({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      password: user.password,
+      dateOfBirth: dateOfBirth,
+      mobileNumber: user.mobileNumber,
+      addressLine: user.addressLine,
+      city: user.city,
+      country: user.country,
+    })
       .then((response) => {
         console.log("registration response:", response);
       })
       .catch((error) => {
         console.log("registration error: ", error);
       });
+
+    setUser({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      mobileNumber: "",
+      addressLine: "",
+      city: "",
+      country: "",
+    });
+
+    setDateOfBirth(new Date(Date().toLocaleString()));
   };
 
   return (
