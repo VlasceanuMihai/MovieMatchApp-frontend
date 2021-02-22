@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import { useEffect } from "react";
-import { getAllTodos, getUserDetails } from "../../api/todosApi.js";
+import { movies } from "../../APIs/Endpoints";
 import { Box } from "@material-ui/core";
 
 const TodoScreen = (props) => {
@@ -15,15 +15,15 @@ const TodoScreen = (props) => {
     { field: "description", headerName: "Description", width: 200 },
   ];
 
-  useEffect(() => {
-    getAllTodos().then((response) => {
-      movies(response.data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   getAllTodos().then((response) => {
+  //     movies(response.data);
+  //   });
+  // }, []);
 
   const onCellClick = (cellInfo) => {
     const userId = cellInfo.row.userId;
-    getUserDetails(userId)
+    movies(userId)
       .then((userData) => {
         setMovies({
           user: userData.data,
