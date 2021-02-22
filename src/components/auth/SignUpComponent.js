@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { signUpApi } from "../../APIs/Endpoints";
+import CopyrightComponent from "../copyright/CopyrightComponent";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -22,6 +23,16 @@ import {
 } from "@material-ui/pickers";
 
 const useStyles = makeStyles((theme) => ({
+  image: {
+    backgroundImage: "url(https://source.unsplash.com/random)",
+    backgroundRepeat: "no-repeat",
+    backgroundColor:
+      theme.palette.type === "light"
+        ? theme.palette.grey[50]
+        : theme.palette.grey[900],
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
@@ -265,16 +276,16 @@ function SignUp() {
             id="signup"
             name="signup"
             type="signup"
-            fullWidth
             variant="contained"
             color="primary"
+            fullWidth
             onClick={handleSignUp}
           >
             Sign Up
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/login" variant="body2" color="textPrimary">
                 Already have an account? Login
               </Link>
             </Grid>
@@ -282,22 +293,9 @@ function SignUp() {
         </form>
       </div>
       <Box mt={5}>
-        <Copyright />
+        <CopyrightComponent />
       </Box>
     </Container>
-  );
-}
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://movie-match.com/">
-        Movie Match
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
   );
 }
 
