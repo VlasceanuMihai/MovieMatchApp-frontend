@@ -15,8 +15,6 @@ function App() {
       <Route path="/home" exact component={Dashboard} />
       <Route path="/movies" exact component={Movies} />
     </div>
-
-    //git test
   );
 }
 
