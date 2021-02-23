@@ -1,50 +1,37 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
-import { useEffect } from "react";
-import { movies } from "../../APIs/Endpoints";
+import { getMovies } from "../../APIs/Endpoints";
 import { Box } from "@material-ui/core";
 
-const TodoScreen = (props) => {
-  const [movies, setMovies] = useState(null);
+const Movies = (props) => {
+  const [movie, setMovies] = useState(null);
 
-  const columns = [
-    { field: "id", headerName: "ID" },
-    { field: "movieId", headerName: "movieId" },
-    { field: "title", headerName: "Title", width: 800 },
+  const moviesColumns = [
+    { field: "id", headerName: "movieId" },
+    { field: "name", headerName: "Title", width: 200 },
     { field: "description", headerName: "Description", width: 200 },
   ];
 
-  // useEffect(() => {
-  //   getAllTodos().then((response) => {
-  //     movies(response.data);
-  //   });
-  // }, []);
-
-  const onCellClick = (cellInfo) => {
-    const userId = cellInfo.row.userId;
-    movies(userId)
-      .then((userData) => {
-        setMovies({
-          user: userData.data,
-          todo: cellInfo.row,
-        });
-      })
-      .catch(() => {
-        console.error("Something went wrong");
-      });
-  };
+  useEffect(() => {
+    getMovies().then((response) => {
+      console.log(response.data);
+      setMovies(response.data);
+    });
+  }, []);
 
   return (
-    <Box width="100%" height="100%" display="flex" justifyContent="center">
-      {movies === null && <div>There is no todo yet</div>}
-      {movies && (
-        <Box width="80%">
-          <DataGrid onCellClick={onCellClick} rows={movies} columns={columns} />
-        </Box>
-      )}
-    </Box>
+    <div style={{ height: 800, width: "100%" }}>
+      <Box width="100%" height="100%" display="flex" justifyContent="center">
+        {movie === null && <div>There is no movie yet...</div>}
+        {movie && (
+          <Box width="80%" height="80%">
+            <DataGrid rows={movie} columns={moviesColumns} />
+          </Box>
+        )}
+      </Box>
+    </div>
   );
 };
 
-export default TodoScreen;
+export default Movies;
