@@ -1,7 +1,7 @@
-import React from "react";
-import { useState } from "react";
-import { signUpApi } from "../../APIs/Endpoints";
+import React, { useCallback } from "react";
 import CopyrightComponent from "../copyright/CopyrightComponent";
+import validate from "../../validations/SignUpFormValidationRules";
+import useForm from "./useForm";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -65,59 +65,14 @@ const useStyles = makeStyles((theme) => ({
 function SignUp() {
   const classes = useStyles();
 
-  const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    mobileNumber: "",
-    addressLine: "",
-    city: "",
-    country: "",
-  });
-
-  const [dateOfBirth, setDateOfBirth] = useState(
-    new Date(Date().toLocaleString())
-  );
-
-  function handleChange(event) {
-    event.persist();
-    setUser((user) => ({ ...user, [event.target.name]: event.target.value }));
-  }
-
-  const handleSignUp = (event) => {
-    event.preventDefault();
-    signUpApi({
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      password: user.password,
-      dateOfBirth: dateOfBirth,
-      mobileNumber: user.mobileNumber,
-      addressLine: user.addressLine,
-      city: user.city,
-      country: user.country,
-    })
-      .then((response) => {
-        console.log("registration response:", response);
-      })
-      .catch((error) => {
-        console.log("registration error: ", error);
-      });
-
-    setUser({
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      mobileNumber: "",
-      addressLine: "",
-      city: "",
-      country: "",
-    });
-
-    setDateOfBirth(new Date(Date().toLocaleString()));
-  };
+  const {
+    user,
+    dateOfBirth,
+    handleChange,
+    setDateOfBirth,
+    handleSubmit,
+    errors,
+  } = useForm(validate);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -133,31 +88,33 @@ function SignUp() {
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <TextField
+                className={`input ${errors.firstName && "is-danger"}`}
                 autoComplete="firstName"
                 variant="standard"
-                name="firstName"
-                required
-                fullWidth
                 id="firstName"
+                name="firstName"
                 label="First Name"
                 autoFocus
-                value={user.firstName}
+                required
+                fullWidth
+                value={user.firstName || ""}
                 onChange={handleChange}
               />
+              {errors.firstName}
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="lastName"
                 variant="standard"
+                id="lastName"
+                name="lastName"
+                label="Last Name"
                 required
                 fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                type="lastName"
-                value={user.lastName}
+                value={user.lastName || ""}
                 onChange={handleChange}
               />
+              {errors.lastName}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -169,9 +126,10 @@ function SignUp() {
                 name="email"
                 label="Email"
                 type="email"
-                value={user.email}
+                value={user.email || ""}
                 onChange={handleChange}
               />
+              {errors.email}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -183,9 +141,10 @@ function SignUp() {
                 name="password"
                 label="Password"
                 type="password"
-                value={user.password}
+                value={user.password || ""}
                 onChange={handleChange}
               />
+              {errors.password}
             </Grid>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <Grid item xs={12} container direction="column" justify="center">
@@ -218,9 +177,10 @@ function SignUp() {
                 name="mobileNumber"
                 label="Mobile Number"
                 type="mobileNumber"
-                value={user.mobileNumber}
+                value={user.mobileNumber || ""}
                 onChange={handleChange}
               />
+              {errors.mobileNumber}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -232,9 +192,10 @@ function SignUp() {
                 name="addressLine"
                 label="Address Line"
                 type="addressLine"
-                value={user.addressLine}
+                value={user.addressLine || ""}
                 onChange={handleChange}
               />
+              {errors.addressLine}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -246,9 +207,10 @@ function SignUp() {
                 name="city"
                 label="City"
                 type="city"
-                value={user.city}
+                value={user.city || ""}
                 onChange={handleChange}
               />
+              {errors.city}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -260,9 +222,10 @@ function SignUp() {
                 name="country"
                 label="Country"
                 type="country"
-                value={user.country}
+                value={user.country || ""}
                 onChange={handleChange}
               />
+              {errors.country}
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
@@ -279,7 +242,7 @@ function SignUp() {
             variant="contained"
             color="primary"
             fullWidth
-            onClick={handleSignUp}
+            onClick={handleSubmit}
           >
             Sign Up
           </Button>
