@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
-import { getMovies } from "../../APIs/Endpoints";
+import { getMovies } from "../../apis/Endpoints";
 import { Box } from "@material-ui/core";
 
 const Movies = (props) => {
