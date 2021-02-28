@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function validate(values) {
+export default function validateForm(values) {
   let errors = {};
 
   // FirstName validation
@@ -11,6 +11,11 @@ export default function validate(values) {
   // LastName validation
   if (!values.lastName.trim()) {
     errors.lastName = "LastName is required!";
+  }
+
+  // Email validation
+  if (!values.email) {
+    errors.email = "Email is required!";
   }
 
   // Password validation

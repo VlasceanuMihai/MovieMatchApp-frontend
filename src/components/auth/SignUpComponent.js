@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import CopyrightComponent from "../copyright/CopyrightComponent";
-import validate from "../../validations/SignUpFormValidationRules";
 import useForm from "./useForm";
 
 import Avatar from "@material-ui/core/Avatar";
@@ -60,6 +59,9 @@ const useStyles = makeStyles((theme) => ({
       color: "#FFF",
     },
   },
+  errors: {
+    color: "red",
+  },
 }));
 
 function SignUp() {
@@ -71,8 +73,12 @@ function SignUp() {
     handleChange,
     setDateOfBirth,
     handleSubmit,
-    errors,
-  } = useForm(validate);
+    submitting,
+  } = useForm(signUp);
+
+  function signUp() {
+    console.log("No errors, submit callback called!");
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -82,13 +88,12 @@ function SignUp() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Sign Up
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <TextField
-                className={`input ${errors.firstName && "is-danger"}`}
                 autoComplete="firstName"
                 variant="standard"
                 id="firstName"
@@ -97,10 +102,11 @@ function SignUp() {
                 autoFocus
                 required
                 fullWidth
+                // noValidate
                 value={user.firstName || ""}
                 onChange={handleChange}
               />
-              {errors.firstName}
+              {user.errors.firstName}
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -114,7 +120,7 @@ function SignUp() {
                 value={user.lastName || ""}
                 onChange={handleChange}
               />
-              {errors.lastName}
+              {user.errors.lastName}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -129,7 +135,7 @@ function SignUp() {
                 value={user.email || ""}
                 onChange={handleChange}
               />
-              {errors.email}
+              {user.errors.email}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -144,7 +150,7 @@ function SignUp() {
                 value={user.password || ""}
                 onChange={handleChange}
               />
-              {errors.password}
+              {user.errors.password}
             </Grid>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <Grid item xs={12} container direction="column" justify="center">
@@ -180,7 +186,7 @@ function SignUp() {
                 value={user.mobileNumber || ""}
                 onChange={handleChange}
               />
-              {errors.mobileNumber}
+              {user.errors.mobileNumber}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -195,7 +201,7 @@ function SignUp() {
                 value={user.addressLine || ""}
                 onChange={handleChange}
               />
-              {errors.addressLine}
+              {user.errors.addressLine}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -210,7 +216,7 @@ function SignUp() {
                 value={user.city || ""}
                 onChange={handleChange}
               />
-              {errors.city}
+              {user.errors.city}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -225,7 +231,7 @@ function SignUp() {
                 value={user.country || ""}
                 onChange={handleChange}
               />
-              {errors.country}
+              {user.errors.country}
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
@@ -252,6 +258,10 @@ function SignUp() {
                 Already have an account? Login
               </Link>
             </Grid>
+          </Grid>
+
+          <Grid>
+            <Typography>{submitting}</Typography>
           </Grid>
         </form>
       </div>
