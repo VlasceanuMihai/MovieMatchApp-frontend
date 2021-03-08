@@ -6,28 +6,29 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import MovieIcon from "@material-ui/icons/Movie";
 import PeopleIcon from "@material-ui/icons/People";
 import BarChartIcon from "@material-ui/icons/BarChart";
+import { Link } from "react-router-dom";
 
 export const mainListItems = (
   <div>
-    <ListItem button>
+    <ListItem button component={Link} to={"/dashboard/:name"}>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
 
-    <ListItem button>
+    <ListItem button component={Link} to={"/movies"}>
       <ListItemIcon>
         <MovieIcon />
       </ListItemIcon>
-      <ListItemText primary="Movies" href="/movies" />
+      <ListItemText primary="Movies"></ListItemText>
     </ListItem>
 
     <ListItem button>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Find people" color="white" />
+      <ListItemText primary="Find people" />
     </ListItem>
 
     <ListItem button>

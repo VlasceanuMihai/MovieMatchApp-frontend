@@ -1,4 +1,5 @@
 import "./App.css";
+// import "./bootstrap.css";
 import { Route, Switch } from "react-router-dom";
 import SignUpComponent from "./components/auth/SignUpComponent";
 import LoginComponent from "./components/auth/LoginComponent";

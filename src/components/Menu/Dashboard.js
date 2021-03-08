@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,7 +8,6 @@ import Drawer from "@material-ui/core/Drawer";
 // import Box from "@material-ui/core/Box";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
@@ -18,8 +18,14 @@ import Grid from "@material-ui/core/Grid";
 // import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import { mainListItems } from "./Sidebar";
 import Button from "@material-ui/core/Button";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import MovieIcon from "@material-ui/icons/Movie";
+import PeopleIcon from "@material-ui/icons/People";
+import BarChartIcon from "@material-ui/icons/BarChart";
 
 const drawerWidth = 240;
 
@@ -111,7 +117,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Dashboard(props) {
   const classes = useStyles();
-  // const { name } = useParams();
+  const name = props.match.params.name;
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -166,7 +172,33 @@ function Dashboard(props) {
           </IconButton>
         </div>
         <Divider />
-        <List color="white">{mainListItems}</List>
+        <ListItem button component={Link} to={`/dashboard/${name}`}>
+          <ListItemIcon>
+            <DashboardIcon />
+          </ListItemIcon>
+          <ListItemText primary="Dashboard" />
+        </ListItem>
+
+        <ListItem button component={Link} to={"/movies"}>
+          <ListItemIcon>
+            <MovieIcon />
+          </ListItemIcon>
+          <ListItemText primary="Movies"></ListItemText>
+        </ListItem>
+
+        <ListItem button>
+          <ListItemIcon>
+            <PeopleIcon />
+          </ListItemIcon>
+          <ListItemText primary="Find people" />
+        </ListItem>
+
+        <ListItem button>
+          <ListItemIcon>
+            <BarChartIcon />
+          </ListItemIcon>
+          <ListItemText primary="Reports" />
+        </ListItem>
         <Divider />
       </Drawer>
       <main className={classes.content}>
