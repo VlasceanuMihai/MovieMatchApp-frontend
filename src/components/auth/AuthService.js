@@ -25,7 +25,7 @@ function AuthService() {
     let basicAuthHeader = "Basic " + window.btoa(USERNAME + ":" + PASSWORD);
 
     axios.interceptors.request.use((config) => {
-      if (this.isUserLoggedIn()) {
+      if (isUserLoggedIn()) {
         config.headers.authorization = basicAuthHeader;
       }
       return config;

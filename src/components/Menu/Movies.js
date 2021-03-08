@@ -8,8 +8,8 @@ const Movies = (props) => {
   const [movie, setMovies] = useState(null);
 
   const moviesColumns = [
-    { field: "id", headerName: "movieId" },
-    { field: "name", headerName: "Title", width: 200 },
+    { field: "id", headerName: "Id" },
+    { field: "name", headerName: "Title", width: 400 },
     { field: "description", headerName: "Description", width: 200 },
   ];
 
@@ -25,7 +25,7 @@ const Movies = (props) => {
       <Box width="100%" height="100%" display="flex" justifyContent="center">
         {movie === null && <div>There is no movie yet...</div>}
         {movie && (
-          <Box width="80%" height="80%">
+          <Box width="95%" height="90%">
             <DataGrid rows={movie} columns={moviesColumns} />
           </Box>
         )}
