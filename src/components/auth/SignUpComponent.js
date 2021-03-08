@@ -1,6 +1,6 @@
-import React, { useCallback } from "react";
-import CopyrightComponent from "../copyright/CopyrightComponent";
+import React from "react";
 import useForm from "./useForm";
+import CopyrightComponent from "../copyright/CopyrightComponent";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -261,7 +261,7 @@ function SignUp() {
           </Grid>
 
           <Grid>
-            <Typography>{submitting}</Typography>
+            <Typography className={classes.errors}>{submitting}</Typography>
           </Grid>
         </form>
       </div>

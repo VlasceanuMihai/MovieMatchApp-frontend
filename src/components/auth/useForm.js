@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { signUpApi } from "../../apis/Endpoints";
 import validateForm from "../../validations/SignUpFormValidationRules";
 
@@ -29,9 +29,9 @@ function useForm(callback) {
   const [error, setError] = useState({});
   const [submitting, setSubmitting] = useState("");
 
-  const validEmailRegex = RegExp(
-    /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-  );
+  // const validEmailRegex = RegExp(
+  //   /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+  // );
 
   const validate = (errors) => {
     let valid = true;

@@ -1,4 +1,7 @@
 import React from "react";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import AuthService from "./AuthService";
 import CopyrightComponent from "../copyright/CopyrightComponent";
 
 import Avatar from "@material-ui/core/Avatar";
@@ -52,10 +55,54 @@ const useStyles = makeStyles((theme) => ({
       color: "#FFF",
     },
   },
+  errors: {
+    color: "red",
+  },
 }));
 
-export default function SignInSide() {
+function LoginComponent() {
   const classes = useStyles();
+  const { successfulLogin } = AuthService();
+  let history = useHistory();
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+    hasLoginFailed: false,
+    showSuccessMessage: false,
+  });
+
+  function handleChange(event) {
+    event.preventDefault();
+
+    setUserData((userData) => ({
+      ...userData,
+      [event.target.name]: event.target.value,
+    }));
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    if (userData.email === "mihai" && userData.password === "parola") {
+      console.log("Login successful.");
+      successfulLogin(userData.email, userData.password);
+      history.push(`/dashboard/${userData.email}`);
+      setUserData({
+        email: "",
+        password: "",
+        hasLoginFailed: false,
+        showSuccessMessage: true,
+      });
+    } else {
+      console.log("Invalid credentials.");
+      setUserData({
+        email: "",
+        password: "",
+        hasLoginFailed: true,
+        showSuccessMessage: false,
+      });
+    }
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -74,13 +121,15 @@ export default function SignInSide() {
               id="email"
               name="email"
               type="email"
-              label="Email Address"
+              label="Email"
               variant="standard"
               margin="normal"
               required
               fullWidth
               autoComplete="email"
               autoFocus
+              value={userData.email}
+              onChange={handleChange}
             />
             <TextField
               id="password"
@@ -92,6 +141,8 @@ export default function SignInSide() {
               required
               fullWidth
               autoComplete="current-password"
+              value={userData.password}
+              onChange={handleChange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -105,7 +156,7 @@ export default function SignInSide() {
               variant="contained"
               color="primary"
               fullWidth
-              // onClick={handleSignUp}
+              onClick={handleSubmit}
             >
               Login
             </Button>
@@ -121,12 +172,19 @@ export default function SignInSide() {
                 </Link>
               </Grid>
             </Grid>
-            <Box mt={5}>
-              <CopyrightComponent />
-            </Box>
+            <Grid>
+              <Typography className={classes.errors}>
+                {userData.hasLoginFailed && "Invalid username/password"}
+              </Typography>
+            </Grid>
           </form>
         </div>
+        <Box mt={5}>
+          <CopyrightComponent />
+        </Box>
       </Grid>
     </Grid>
   );
 }
+
+export default LoginComponent;
