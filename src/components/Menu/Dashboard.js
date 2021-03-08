@@ -1,25 +1,23 @@
 import React from "react";
-import CopyrightComponent from "../copyright/CopyrightComponent";
 
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
-import Box from "@material-ui/core/Box";
+// import Box from "@material-ui/core/Box";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
+// import Badge from "@material-ui/core/Badge";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Link from "@material-ui/core/Link";
+// import Paper from "@material-ui/core/Paper";
+// import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems } from "./Sidebar";
 import Button from "@material-ui/core/Button";
 
@@ -31,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
+    background: "#546e7a",
   },
   toolbarIcon: {
     display: "flex",
@@ -62,6 +61,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: "white",
+    display: "flex",
   },
   drawerPaper: {
     position: "relative",
@@ -71,6 +72,8 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
+    background: "#78909c",
+    color: "white",
   },
   drawerPaperClose: {
     overflowX: "hidden",
@@ -82,6 +85,8 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       width: theme.spacing(9),
     },
+    background: "#78909c",
+    color: "white",
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
@@ -104,8 +109,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+function Dashboard(props) {
   const classes = useStyles();
+  // const { name } = useParams();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -113,7 +119,7 @@ export default function Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
     <div className={classes.root}>
@@ -142,11 +148,9 @@ export default function Dashboard() {
             noWrap
             className={classes.title}
           >
-            Home
+            Dashboard
           </Typography>
-          <IconButton color="inherit">
-            <Button color="inherit">Logout</Button>
-          </IconButton>
+          <Button color="inherit">Logout</Button>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -162,12 +166,21 @@ export default function Dashboard() {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        <List color="white">{mainListItems}</List>
         <Divider />
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
+        <Container maxWidth="lg" className={classes.container}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={8} lg={9}>
+              <div>Welcome, {props.match.params.name}</div>
+            </Grid>
+          </Grid>
+        </Container>
       </main>
     </div>
   );
 }
+
+export default Dashboard;

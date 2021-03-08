@@ -23,18 +23,11 @@ export const mainListItems = (
       <ListItemText primary="Movies" href="/movies" />
     </ListItem>
 
-    {/* <ListItem button>
-      <ListItemIcon>
-        <MovieIcon />
-      </ListItemIcon>
-      <ListItemText primary="Find movie" />
-    </ListItem> */}
-
     <ListItem button>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Find people" />
+      <ListItemText primary="Find people" color="white" />
     </ListItem>
 
     <ListItem button>
