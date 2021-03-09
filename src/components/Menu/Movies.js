@@ -6,6 +6,7 @@ import { Box } from "@material-ui/core";
 
 const Movies = (props) => {
   const [movie, setMovies] = useState(null);
+  const [movieError, setMovieError] = useState(null);
 
   const moviesColumns = [
     { field: "id", headerName: "Id" },
@@ -14,15 +15,21 @@ const Movies = (props) => {
   ];
 
   useEffect(() => {
-    getMovies().then((response) => {
-      console.log(response.data);
-      setMovies(response.data);
-    });
+    getMovies()
+      .then((response) => {
+        console.log(response.data);
+        setMovies(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+        setMovieError(error.data);
+      });
   }, []);
 
   return (
     <div style={{ height: 800, width: "100%" }}>
       <Box width="100%" height="100%" display="flex" justifyContent="center">
+        {movieError !== null && <div>movieError</div>}
         {movie === null && <div>There is no movie yet...</div>}
         {movie && (
           <Box width="95%" height="90%">

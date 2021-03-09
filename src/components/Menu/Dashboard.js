@@ -119,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Dashboard(props) {
   const classes = useStyles();
-  const name = props.match.params.name;
+  // const name = props.match.params.name;
   const history = useHistory();
   const { logout } = AuthService();
   const [open, setOpen] = React.useState(true);
@@ -183,7 +183,7 @@ function Dashboard(props) {
           </IconButton>
         </div>
         <Divider />
-        <ListItem button component={Link} to={`/dashboard/${name}`}>
+        <ListItem button component={Link} to={"/dashboard"}>
           <ListItemIcon>
             <DashboardIcon />
           </ListItemIcon>

@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 
 function LoginComponent() {
   const classes = useStyles();
-  const { successfulLogin } = AuthService();
+  const { executeBasicAtuh, successfulLogin } = AuthService();
   let history = useHistory();
   const [userData, setUserData] = useState({
     email: "",
@@ -83,24 +83,26 @@ function LoginComponent() {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    if (userData.email === "mihai" && userData.password === "parola") {
-      successfulLogin(userData.email, userData.password);
-      history.push("/dashboard");
-      setUserData({
-        email: "",
-        password: "",
-        hasLoginFailed: false,
-        showSuccessMessage: true,
+    executeBasicAtuh(userData.email, userData.password)
+      .then(() => {
+        successfulLogin(userData.email, userData.password);
+        history.push("/dashboard");
+        setUserData({
+          email: "",
+          password: "",
+          hasLoginFailed: false,
+          showSuccessMessage: true,
+        });
+      })
+      .catch(() => {
+        console.log("Invalid credentials.");
+        setUserData({
+          email: "",
+          password: "",
+          hasLoginFailed: true,
+          showSuccessMessage: false,
+        });
       });
-    } else {
-      console.log("Invalid credentials.");
-      setUserData({
-        email: "",
-        password: "",
-        hasLoginFailed: true,
-        showSuccessMessage: false,
-      });
-    }
   }
 
   return (
