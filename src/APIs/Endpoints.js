@@ -12,7 +12,6 @@ export const signUpApi = (data) => {
 
 // Get movies
 export const getMovies = () => {
-  console.log(basicAuthHeader);
   return axios.get(`${BASE_API}/api/v1/movies`, {
     headers: {
       authorization: basicAuthHeader,

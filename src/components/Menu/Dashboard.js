@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import AuthService from "../auth/AuthService";
+import { useHistory } from "react-router-dom";
 
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -118,6 +120,8 @@ const useStyles = makeStyles((theme) => ({
 function Dashboard(props) {
   const classes = useStyles();
   const name = props.match.params.name;
+  const history = useHistory();
+  const { logout } = AuthService();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -125,6 +129,11 @@ function Dashboard(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  async function handleLogout() {
+    logout();
+    history.push("/login");
+  }
   // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
@@ -156,7 +165,9 @@ function Dashboard(props) {
           >
             Dashboard
           </Typography>
-          <Button color="inherit">Logout</Button>
+          <Button color="inherit" onClick={handleLogout}>
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -206,7 +217,7 @@ function Dashboard(props) {
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={8} lg={9}>
-              <div>Welcome, {props.match.params.name}</div>
+              <div>Welcome, take a sit & enjoy!</div>
             </Grid>
           </Grid>
         </Container>

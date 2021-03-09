@@ -80,13 +80,12 @@ function LoginComponent() {
     }));
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     if (userData.email === "mihai" && userData.password === "parola") {
-      console.log("Login successful.");
       successfulLogin(userData.email, userData.password);
-      history.push(`/dashboard/${userData.email}`);
+      history.push("/dashboard");
       setUserData({
         email: "",
         password: "",
@@ -173,9 +172,11 @@ function LoginComponent() {
               </Grid>
             </Grid>
             <Grid>
-              <Typography className={classes.errors}>
-                {userData.hasLoginFailed && "Invalid username/password"}
-              </Typography>
+              {userData.hasLoginFailed && (
+                <div className="alert alert-warning">
+                  Invalid username/password
+                </div>
+              )}
             </Grid>
           </form>
         </div>

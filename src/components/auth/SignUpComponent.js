@@ -261,7 +261,8 @@ function SignUp() {
           </Grid>
 
           <Grid>
-            <Typography className={classes.errors}>{submitting}</Typography>
+            <div className="alert alert-warning">{submitting}</div>
+            {/* <Typography className={classes.errors}>{submitting}</Typography> */}
           </Grid>
         </form>
       </div>
