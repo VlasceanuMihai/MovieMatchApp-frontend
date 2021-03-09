@@ -8,6 +8,7 @@ function AuthService() {
   }
 
   function logout() {
+    console.log("Successful logout!");
     sessionStorage.removeItem("authenticatedUser");
   }
 
@@ -34,6 +35,8 @@ function AuthService() {
 
   return {
     successfulLogin,
+    logout,
+    isUserLoggedIn,
   };
 }
 

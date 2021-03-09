@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { signUpApi } from "../../apis/Endpoints";
+import { useHistory } from "react-router-dom";
 import validateForm from "../../validations/SignUpFormValidationRules";
 
 function useForm(callback) {
@@ -29,6 +30,7 @@ function useForm(callback) {
   const [error, setError] = useState({});
   const [submitting, setSubmitting] = useState("");
 
+  let history = useHistory();
   // const validEmailRegex = RegExp(
   //   /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
   // );
@@ -114,6 +116,8 @@ function useForm(callback) {
         .catch((error) => {
           console.log("registration error: ", error);
         });
+
+      history.push(`/dashboard/${user.firstName + " " + user.lastName}`);
 
       setUser({
         firstName: "",
