@@ -85,6 +85,7 @@ function LoginComponent() {
 
     executeAuthentication(userData.email, userData.password)
       .then((response) => {
+        console.log("response.data.token: ", response.data.token);
         successfulLogin(userData.email, response.data.token);
         history.push("/dashboard");
         setUserData({
