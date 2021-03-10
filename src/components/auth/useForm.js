@@ -113,7 +113,7 @@ function useForm(callback) {
         country: user.country,
       })
         .then((response) => {
-          console.log("registration response:", response);
+          console.log("Registration successful -> response:", response);
           executeAuthentication(user.email, user.password)
             .then((response) => {
               successfulLogin(user.email, response.data.token);
@@ -122,26 +122,28 @@ function useForm(callback) {
             .catch((error) => {
               console.log("Error: ", error);
             });
+
+          console.log("Authenticated", user);
+          setSubmitting("");
+
+          setUser({
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+            mobileNumber: "",
+            addressLine: "",
+            city: "",
+            country: "",
+            errors: {},
+          });
+
+          setDateOfBirth(new Date(Date().toLocaleString()));
         })
         .catch((error) => {
-          console.log("registration error: ", error);
+          console.log("Registration error: ", error.response);
+          setSubmitting("Name/Email/Mobile number already exists.");
         });
-
-      setUser({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        mobileNumber: "",
-        addressLine: "",
-        city: "",
-        country: "",
-        errors: {},
-      });
-
-      setDateOfBirth(new Date(Date().toLocaleString()));
-      console.log("Authenticated", user);
-      setSubmitting("");
     } else {
       console.log("Validation errors: try again!", user.errors, error);
       setSubmitting("Complete required fields!");
