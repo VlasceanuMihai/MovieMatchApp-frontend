@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import AuthService from "../auth/AuthService";
+import AuthenticationService from "../auth/AuthenticationService";
 import { useHistory } from "react-router-dom";
 
 import clsx from "clsx";
@@ -121,7 +121,7 @@ function Dashboard(props) {
   const classes = useStyles();
   // const name = props.match.params.name;
   const history = useHistory();
-  const { logout } = AuthService();
+  const { logout } = AuthenticationService();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);

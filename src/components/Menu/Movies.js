@@ -20,7 +20,7 @@ const Movies = (props) => {
         console.log(response.data);
         setMovies(response.data);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
         setMovieError(error.data);
       });

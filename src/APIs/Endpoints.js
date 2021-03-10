@@ -2,10 +2,8 @@ import axios from "axios";
 
 export const BASE_API = "http://localhost:8080/movieMatch";
 
-export const executeBasicAtuhApi = async (basicAuthHeader) => {
-  return await axios.get(`${BASE_API}/api/v1/basicAuth`, {
-    headers: { authorization: basicAuthHeader },
-  });
+export const executeAuthenticationApi = async (username, password) => {
+  return await axios.post(`${BASE_API}/authenticate`, { username, password });
 };
 
 // Sign-up API

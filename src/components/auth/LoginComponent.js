@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import AuthService from "./AuthService";
+import AuthenticationService from "./AuthenticationService";
 import CopyrightComponent from "../copyright/CopyrightComponent";
 
 import Avatar from "@material-ui/core/Avatar";
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: "center",
   },
   paper: {
-    margin: theme.spacing(8, 15),
+    margin: theme.spacing(8, 18),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 
 function LoginComponent() {
   const classes = useStyles();
-  const { executeBasicAtuh, successfulLogin } = AuthService();
+  const { executeAuthentication, successfulLogin } = AuthenticationService();
   let history = useHistory();
   const [userData, setUserData] = useState({
     email: "",
@@ -83,9 +83,9 @@ function LoginComponent() {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    executeBasicAtuh(userData.email, userData.password)
-      .then(() => {
-        successfulLogin(userData.email, userData.password);
+    executeAuthentication(userData.email, userData.password)
+      .then((response) => {
+        successfulLogin(userData.email, response.data.token);
         history.push("/dashboard");
         setUserData({
           email: "",
