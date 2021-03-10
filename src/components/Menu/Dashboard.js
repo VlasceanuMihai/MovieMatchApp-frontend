@@ -183,7 +183,7 @@ function Dashboard(props) {
           </IconButton>
         </div>
         <Divider />
-        <ListItem button component={Link} to={"/dashboard"}>
+        <ListItem button color="inherit" component={Link} to={"/dashboard"}>
           <ListItemIcon>
             <DashboardIcon />
           </ListItemIcon>
