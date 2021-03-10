@@ -7,7 +7,9 @@ import Dashboard from "./components/menu/Dashboard";
 import ErrorComponent from "./components/error-handler/ErrorComponent";
 import LogoutComponent from "./components/auth/LogoutComponent";
 import AuthenticatedRoute from "./components/auth/AuthenticatedRoute";
-import SettingsComponent from "./components/settings/SettingsComponent";
+import MainLayout from "./layouts/mainLayout/MainLayout";
+import DashboardLayout from "./layouts/dasboardLayout/DashboardLayout";
+import SettingsComponent from "./components/menu/settings/SettingsComponent";
 
 function App() {
   return (
@@ -18,7 +20,12 @@ function App() {
         <Route path="/login" exact component={LoginComponent} />
         <Route path="/" exact component={LoginComponent} />
         <AuthenticatedRoute path="/logout" exact component={LogoutComponent} />
-        <AuthenticatedRoute path="/dashboard" exact component={Dashboard} />
+        <AuthenticatedRoute path="/oldDashboard" exact component={Dashboard} />
+        <AuthenticatedRoute
+          path="/dashboard"
+          exact
+          component={DashboardLayout}
+        />
         <AuthenticatedRoute path="/movies" exact component={Movies} />
         <AuthenticatedRoute
           path="/updatePassword"
