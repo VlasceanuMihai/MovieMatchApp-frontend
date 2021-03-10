@@ -122,7 +122,7 @@ function Dashboard(props) {
   // const name = props.match.params.name;
   const history = useHistory();
   const { logout } = AuthenticationService();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
