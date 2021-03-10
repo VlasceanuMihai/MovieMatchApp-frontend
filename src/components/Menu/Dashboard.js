@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import AuthService from "../auth/AuthService";
+import AuthenticationService from "../auth/AuthenticationService";
 import { useHistory } from "react-router-dom";
 
 import clsx from "clsx";
@@ -119,10 +119,10 @@ const useStyles = makeStyles((theme) => ({
 
 function Dashboard(props) {
   const classes = useStyles();
-  const name = props.match.params.name;
+  // const name = props.match.params.name;
   const history = useHistory();
-  const { logout } = AuthService();
-  const [open, setOpen] = React.useState(true);
+  const { logout } = AuthenticationService();
+  const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -183,7 +183,7 @@ function Dashboard(props) {
           </IconButton>
         </div>
         <Divider />
-        <ListItem button component={Link} to={`/dashboard/${name}`}>
+        <ListItem button component={Link} to={"/dashboard"}>
           <ListItemIcon>
             <DashboardIcon />
           </ListItemIcon>

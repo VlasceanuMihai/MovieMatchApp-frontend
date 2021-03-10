@@ -1,9 +1,9 @@
 import React from "react";
-import AuthService from "./AuthService";
+import AuthenticationService from "./AuthenticationService";
 import { Route, Redirect } from "react-router-dom";
 
 function AuthenticatedRoute(props) {
-  const { isUserLoggedIn } = AuthService();
+  const { isUserLoggedIn } = AuthenticationService();
 
   if (isUserLoggedIn()) {
     return <Route {...props} />;
