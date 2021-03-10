@@ -94,7 +94,7 @@ function LoginComponent() {
           showSuccessMessage: true,
         });
       })
-      .catch(() => {
+      .catch((error) => {
         console.log("Invalid credentials.");
         setUserData({
           email: "",

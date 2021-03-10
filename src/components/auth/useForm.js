@@ -2,8 +2,10 @@ import { useState } from "react";
 import { signUpApi } from "../../apis/Endpoints";
 import { useHistory } from "react-router-dom";
 import validateForm from "../../validations/SignUpFormValidationRules";
+import AuthenticationService from "./AuthenticationService";
 
 function useForm(callback) {
+  const { executeAuthentication, successfulLogin } = AuthenticationService();
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
@@ -112,12 +114,18 @@ function useForm(callback) {
       })
         .then((response) => {
           console.log("registration response:", response);
+          executeAuthentication(user.email, user.password)
+            .then((response) => {
+              successfulLogin(user.email, response.data.token);
+              history.push("/dashboard");
+            })
+            .catch((error) => {
+              console.log("Error: ", error);
+            });
         })
         .catch((error) => {
           console.log("registration error: ", error);
         });
-
-      history.push(`/dashboard/${user.firstName + " " + user.lastName}`);
 
       setUser({
         firstName: "",
