@@ -7,6 +7,7 @@ import Dashboard from "./components/menu/Dashboard";
 import ErrorComponent from "./components/error-handler/ErrorComponent";
 import LogoutComponent from "./components/auth/LogoutComponent";
 import AuthenticatedRoute from "./components/auth/AuthenticatedRoute";
+import SettingsComponent from "./components/settings/SettingsComponent";
 
 function App() {
   return (
@@ -17,12 +18,13 @@ function App() {
         <Route path="/login" exact component={LoginComponent} />
         <Route path="/" exact component={LoginComponent} />
         <AuthenticatedRoute path="/logout" exact component={LogoutComponent} />
-        <AuthenticatedRoute
-          path="/dashboard"
-          exact
-          component={Dashboard}
-        />
+        <AuthenticatedRoute path="/dashboard" exact component={Dashboard} />
         <AuthenticatedRoute path="/movies" exact component={Movies} />
+        <AuthenticatedRoute
+          path="/updatePassword"
+          exact
+          component={SettingsComponent}
+        />
         <Route component={ErrorComponent} />
       </Switch>
     </div>
