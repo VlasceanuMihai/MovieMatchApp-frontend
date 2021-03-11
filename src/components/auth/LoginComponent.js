@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import AuthenticationService from "./AuthenticationService";
 import CopyrightComponent from "../copyright/CopyrightComponent";
@@ -70,6 +70,8 @@ function LoginComponent() {
     hasLoginFailed: false,
     showSuccessMessage: false,
   });
+
+  useEffect(() => {});
 
   function handleChange(event) {
     event.preventDefault();

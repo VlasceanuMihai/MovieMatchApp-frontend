@@ -36,6 +36,7 @@ const DashboardLayout = () => {
   const classes = useStyles();
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
 
+
   return (
     <div className={classes.root}>
       <TopBarDashboard onMobileNavOpen={() => setMobileNavOpen(true)} />
