@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 0,
   },
   button: {
-    color: theme.palette.text.secondary,
+    color: "#546e7a",
     fontWeight: theme.typography.fontWeightMedium,
     justifyContent: "flex-start",
     letterSpacing: 0,
@@ -23,12 +23,13 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
   title: {
+    display: "flex",
     marginRight: "auto",
   },
   active: {
     color: theme.palette.primary.main,
     "& $title": {
-      fontWeight: theme.typography.fontWeightMedium,
+      fontWeight: theme.typography.fontWeightBold,
     },
     "& $icon": {
       color: theme.palette.primary.main,

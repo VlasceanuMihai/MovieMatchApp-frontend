@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Outlet } from "react-outlet";
 import { makeStyles } from "@material-ui/core";
 import NavBar from "./navbar/NavBar";
 import TopBarDashboard from "./TopBarDashboard";
@@ -46,9 +45,7 @@ const DashboardLayout = () => {
       />
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>
-          <div className={classes.content}>
-            <Outlet />
-          </div>
+          <div className={classes.content}></div>
         </div>
       </div>
     </div>

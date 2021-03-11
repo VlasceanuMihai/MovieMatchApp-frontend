@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import clsx from "clsx";
-import AuthenticationService from "../auth/AuthenticationService";
+import AuthenticationService from "../../auth/AuthenticationService";
 
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
