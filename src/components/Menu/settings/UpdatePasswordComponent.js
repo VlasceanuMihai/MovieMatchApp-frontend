@@ -13,7 +13,10 @@ import {
 } from "@material-ui/core";
 
 const useStyles = makeStyles({
-  root: {},
+  root: {
+    display: "flex",
+    justifyContent: "center",
+  },
 });
 
 const UpdatePasswordComponent = ({ className, ...rest }) => {
@@ -65,7 +68,7 @@ const UpdatePasswordComponent = ({ className, ...rest }) => {
         </CardContent>
         <Divider />
         <Box display="flex" justifyContent="flex-end" p={2}>
-          <Button color="primary" variant="contained" onClick={handleSubmit}>
+          <Button color="i" variant="contained" onClick={handleSubmit}>
             Update
           </Button>
         </Box>

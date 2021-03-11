@@ -5,10 +5,11 @@ import UpdatePasswordComponent from "./UpdatePasswordComponent";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    display: "flex",
     backgroundColor: theme.palette.background.dark,
     minHeight: "100%",
-    paddingBottom: theme.spacing(3),
-    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(2),
+    paddingTop: theme.spacing(1),
   },
 }));
 
