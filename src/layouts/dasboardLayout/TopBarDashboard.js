@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import {
@@ -32,13 +31,11 @@ const useStyles = makeStyles(() => ({
 
 const TopBarDashboard = ({ className, onMobileNavOpen, ...rest }) => {
   const classes = useStyles();
-  const history = useHistory();
   const { logout } = AuthenticationService();
   const [notifications] = useState([]);
 
   async function handleLogout() {
     logout();
-    history.push("/login");
   }
 
   return (
