@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import {
   Box,
@@ -19,12 +20,6 @@ import {
 } from "react-feather";
 import MovieRoundedIcon from "@material-ui/icons/MovieRounded";
 import NavItem from "./NavItem";
-
-const user = {
-  avatar: "",
-  jobTitle: "",
-  name: "Developing...",
-};
 
 const items = [
   {
@@ -78,6 +73,7 @@ const useStyles = makeStyles(() => ({
 const NavBar = ({ onMobileClose, openMobile }) => {
   const classes = useStyles();
   const location = useLocation();
+  const fullname = useSelector((state) => state.userProfile.fullName);
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
@@ -96,7 +92,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           to="/account"
         /> */}
         <Typography className={classes.name} color="textPrimary" variant="h5">
-          {user.name}
+          {fullname}
         </Typography>
       </Box>
       <Divider />

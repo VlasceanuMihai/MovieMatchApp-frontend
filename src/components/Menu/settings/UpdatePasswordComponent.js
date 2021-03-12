@@ -68,7 +68,7 @@ const UpdatePasswordComponent = ({ className, ...rest }) => {
         </CardContent>
         <Divider />
         <Box display="flex" justifyContent="flex-end" p={2}>
-          <Button color="i" variant="contained" onClick={handleSubmit}>
+          <Button color="primary" variant="contained" onClick={handleSubmit}>
             Update
           </Button>
         </Box>

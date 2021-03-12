@@ -9,24 +9,22 @@ const DashboardComponent = () => {
   const loggedInState = useSelector((state) => state.loggedIn);
   const dispatch = useDispatch();
   const { getProfile } = AuthenticationService();
-  // const [profile, setProfile] = useState(null);
 
   useEffect(() => {
     getProfile()
       .then((response) => {
         console.log("Response.data: ", response.data);
         dispatch(setProfile(response.data));
-        console.log(profile);
-        console.log(loggedInState);
-        console.log(profile.email);
-        // setProfile(response.data);
+        console.log("LoggedInState: ", loggedInState);
+        console.log("Email: ", profile.email);
+        console.log("Fullname: ", profile.mobileNumber);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  return <div>Welcome</div>;
+  return <div>Welcome, {profile.fullName}</div>;
 };
 
 export default DashboardComponent;
