@@ -14,11 +14,12 @@ export const signUpApi = async (data) => {
 };
 
 /* GET */
-// 
+// User profile
+export const profileApi = async () => {
+  return await axios.get(`${BASE_API}/api/v1/users/profile`);
+};
 
 // Get movies endpoint
 export const getMovies = async () => {
   return await axios.get(`${BASE_API}/api/v1/movies`);
 };
-
-

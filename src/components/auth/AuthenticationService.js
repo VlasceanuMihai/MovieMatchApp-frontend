@@ -1,9 +1,15 @@
 import axios from "axios";
-import { executeAuthenticationApi } from "../../apis/Endpoints";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { logoutReset } from "../../redux/actions";
+import { executeAuthenticationApi, profileApi } from "../../apis/Endpoints";
 
 const USER_TOKEN = "user_token";
 
 function AuthenticationService() {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
   function createToken(token) {
     let userToken = "Bearer " + token;
     return userToken;
@@ -22,6 +28,8 @@ function AuthenticationService() {
   function logout() {
     console.log("Successful logout!");
     sessionStorage.removeItem(USER_TOKEN);
+    dispatch(logoutReset());
+    history.push("/login");
   }
 
   function isUserLoggedIn() {
@@ -49,6 +57,11 @@ function AuthenticationService() {
     });
   }
 
+  function getProfile() {
+    setupAxiosInterceptors();
+    return profileApi();
+  }
+
   return {
     executeAuthentication,
     successfulLogin,
@@ -56,6 +69,7 @@ function AuthenticationService() {
     isUserLoggedIn,
     getLoggedInUser,
     setupAxiosInterceptors,
+    getProfile,
   };
 }
 
