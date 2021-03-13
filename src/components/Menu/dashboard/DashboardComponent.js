@@ -16,8 +16,6 @@ const DashboardComponent = () => {
         console.log("Response.data: ", response.data);
         dispatch(setProfile(response.data));
         console.log("LoggedInState: ", loggedInState);
-        console.log("Email: ", profile.email);
-        console.log("Fullname: ", profile.mobileNumber);
       })
       .catch((error) => {
         console.log(error);
