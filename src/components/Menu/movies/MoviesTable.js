@@ -96,7 +96,7 @@ const Results = ({ className, movies, ...rest }) => {
                 <TableCell>Name</TableCell>
                 <TableCell>Description</TableCell>
                 <TableCell>Year</TableCell>
-                {/* <TableCell>Popularity</TableCell> */}
+                <TableCell>Popularity</TableCell>
                 <TableCell>Rating</TableCell>
               </TableRow>
             </TableHead>
@@ -126,6 +126,7 @@ const Results = ({ className, movies, ...rest }) => {
                   </TableCell>
                   <TableCell>{movie.description}</TableCell>
                   <TableCell>{movie.year}</TableCell>
+                  <TableCell>{movie.popularity}</TableCell>
                   <TableCell>{movie.rating}</TableCell>
                   {/* <TableCell>
                     {moment(movie.createdAt).format("DD/MM/YYYY")}

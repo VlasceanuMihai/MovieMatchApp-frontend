@@ -30,7 +30,7 @@ const items = [
   {
     href: "/myMovies",
     icon: FilmIcon,
-    title: "My movies",
+    title: "Watchlist",
   },
   {
     href: "/people",
