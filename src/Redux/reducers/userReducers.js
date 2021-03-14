@@ -1,13 +1,16 @@
-import { SET_PROFILE, LOGOUT_RESET } from "./actions";
+import { SET_PROFILE, LOGOUT_RESET } from "../actions/userActions";
 
 const initialState = {
   userProfile: {},
   loggedIn: true,
 };
 
-const rootReducer = (state = initialState, action) => {
+const userReducers = (state = initialState, action) => {
   switch (action.type) {
     case SET_PROFILE:
+      if (action.data === undefined) {
+        action.data = {};
+      }
       return {
         userProfile: {
           //   ...state.userProfile,
@@ -28,10 +31,9 @@ const rootReducer = (state = initialState, action) => {
       };
     case LOGOUT_RESET:
       return initialState;
-
     default:
       return state;
   }
 };
 
-export default rootReducer;
+export default userReducers;

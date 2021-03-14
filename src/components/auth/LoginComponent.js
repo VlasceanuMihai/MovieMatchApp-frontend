@@ -82,7 +82,7 @@ function LoginComponent() {
     }));
   }
 
-  async function handleSubmit(event) {
+  function handleSubmit(event) {
     event.preventDefault();
 
     executeAuthentication(userData.email, userData.password)

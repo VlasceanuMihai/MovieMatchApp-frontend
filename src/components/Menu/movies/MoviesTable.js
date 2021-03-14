@@ -7,6 +7,7 @@ import {
   Box,
   Card,
   Checkbox,
+  Button,
   Table,
   TableBody,
   TableCell,
@@ -17,11 +18,24 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { utils } from "../../../utils/utils";
+import { addMovieApi } from "../../../apis/Endpoints";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
   avatar: {
     marginRight: theme.spacing(2),
+  },
+  addToWatchlist: {
+    borderRadius: 35,
+    backgroundColor: "#546e7a",
+    padding: "2px 15px",
+    fontSize: "15px",
+  },
+  removeFromWatchlist: {
+    borderRadius: 35,
+    backgroundColor: "#B6344E",
+    padding: "2px 15px",
+    fontSize: "15px",
   },
 }));
 
@@ -30,6 +44,7 @@ const Results = ({ className, movies, ...rest }) => {
   const [selectedMovieIds, setSelectedMovieIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
+  const [isMovieAdded, setIsMovieAdded] = useState(false);
 
   const handleSelectAll = (event) => {
     let newSelectedMoviesIds;
@@ -44,6 +59,7 @@ const Results = ({ className, movies, ...rest }) => {
   };
 
   const handleSelectOne = (event, id) => {
+    console.log("aaaaaaa");
     const selectedIndex = selectedMovieIds.indexOf(id);
     let newSelectedMoviesIds = [];
 
@@ -75,6 +91,17 @@ const Results = ({ className, movies, ...rest }) => {
     setPage(newPage);
   };
 
+  function handleAddToWatchlist(event, movie) {
+    console.log("Add movie process started: ", movie);
+    addMovieApi(movie)
+      .then((response) => {
+        setIsMovieAdded(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
       <PerfectScrollbar>
@@ -82,7 +109,7 @@ const Results = ({ className, movies, ...rest }) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell padding="checkbox">
+                {/* <TableCell padding="checkbox">
                   <Checkbox
                     checked={selectedMovieIds.length === movies.length}
                     color="primary"
@@ -92,7 +119,8 @@ const Results = ({ className, movies, ...rest }) => {
                     }
                     onChange={handleSelectAll}
                   />
-                </TableCell>
+                </TableCell> */}
+                <TableCell>Add to watchlist</TableCell>
                 <TableCell>Name</TableCell>
                 <TableCell>Description</TableCell>
                 <TableCell>Year</TableCell>
@@ -107,12 +135,24 @@ const Results = ({ className, movies, ...rest }) => {
                   key={movie.id}
                   selected={selectedMovieIds.indexOf(movie.id) !== -1}
                 >
-                  <TableCell padding="checkbox">
+                  {/* <TableCell padding="checkbox">
                     <Checkbox
                       checked={selectedMovieIds.indexOf(movie.id) !== -1}
                       onChange={(event) => handleSelectOne(event, movie.id)}
                       value="true"
                     />
+                  </TableCell> */}
+                  <TableCell>
+                    <Button
+                      className={classes.addToWatchlist}
+                      size="small"
+                      color="primary"
+                      variant="contained"
+                      disabled={isMovieAdded}
+                      onClick={(event) => handleAddToWatchlist(event, movie)}
+                    >
+                      +
+                    </Button>
                   </TableCell>
                   <TableCell>
                     <Box alignItems="center" display="flex">

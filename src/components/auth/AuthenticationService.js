@@ -1,8 +1,12 @@
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { logoutReset } from "../../redux/actions";
-import { executeAuthenticationApi, profileApi } from "../../apis/Endpoints";
+import { logoutReset } from "../../redux/actions/userActions";
+import {
+  executeAuthenticationApi,
+  profileApi,
+  getWatchlistApi,
+} from "../../apis/Endpoints";
 
 const USER_TOKEN = "user_token";
 
@@ -62,6 +66,11 @@ function AuthenticationService() {
     return profileApi();
   }
 
+  function getWatchlist() {
+    setupAxiosInterceptors();
+    return getWatchlistApi();
+  }
+
   return {
     executeAuthentication,
     successfulLogin,
@@ -70,6 +79,7 @@ function AuthenticationService() {
     getLoggedInUser,
     setupAxiosInterceptors,
     getProfile,
+    getWatchlist,
   };
 }
 

@@ -23,17 +23,13 @@ const useStyles = makeStyles((theme) => ({
 const Toolbar = ({ className, ...rest }) => {
   const classes = useStyles();
 
-  function handleAddMovie() {
-    console.log("Add movieee!");
-  }
-
   return (
     <div className={clsx(classes.root, className)} {...rest}>
-      <Box className={classes.addButton} display="flex" justifyContent="flex-start">
+      {/* <Box className={classes.addButton} display="flex" justifyContent="flex-start">
         <Button color="primary" variant="contained" onClick={handleAddMovie}>
           Add movie
         </Button>
-      </Box>
+      </Box> */}
       <Box mt={3}>
         <Card>
           <CardContent>
