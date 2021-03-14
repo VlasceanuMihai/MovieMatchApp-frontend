@@ -4,7 +4,7 @@ import { Box, Container, makeStyles } from "@material-ui/core";
 import Page from "../../../utils/Page";
 import MoviesTable from "./MoviesTable";
 import Toolbar from "./Toolbar";
-import { getMovies } from "../../../apis/Endpoints";
+import { getMoviesApi } from "../../../apis/Endpoints";
 import AuthenticationService from "../../auth/AuthenticationService";
 
 const useStyles = makeStyles((theme) => ({
@@ -21,14 +21,13 @@ const useStyles = makeStyles((theme) => ({
 
 const MoviesComponent = () => {
   const { setupAxiosInterceptors } = AuthenticationService();
-  const [movie, setMovies] = useState(null);
+  const [movies, setMovies] = useState(null);
   const [movieError, setMovieError] = useState(null);
   const classes = useStyles();
-  // const [movies] = useState(data);
 
   useEffect(() => {
     setupAxiosInterceptors();
-    getMovies()
+    getMoviesApi()
       .then((response) => {
         console.log(response.data);
         setMovies(response.data);
@@ -45,8 +44,8 @@ const MoviesComponent = () => {
         <Toolbar />
         <Box mt={3}>
           {movieError !== null && <div>{movieError}</div>}
-          {movie === null && <div>There is no movie yet...</div>}
-          {movie && <MoviesTable movies={movie} />}
+          {movies === null && <div>There is no movie yet...</div>}
+          {movies && <MoviesTable movies={movies} />}
         </Box>
       </Container>
     </Page>

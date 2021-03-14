@@ -33,14 +33,14 @@ const items = [
     title: "Watchlist",
   },
   {
-    href: "/people",
-    icon: UsersIcon,
-    title: "People",
-  },
-  {
     href: "/movies",
     icon: MovieRoundedIcon,
     title: "Movies",
+  },
+  {
+    href: "/people",
+    icon: UsersIcon,
+    title: "People",
   },
   {
     href: "/account",
@@ -91,7 +91,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           src={user.avatar}
           to="/account"
         /> */}
-        <Typography className={classes.name} color="textPrimary" variant="h5">
+        <Typography className={classes.name} color="textPrimary" variant="h6">
           {fullname}
         </Typography>
       </Box>

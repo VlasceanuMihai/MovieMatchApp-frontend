@@ -1,4 +1,7 @@
-import { createStore } from "redux";
-import rootReducer from "./reducers";
+import { createStore, combineReducers } from "redux";
+import userReducers from "./reducers/userReducers";
+import watchlistReducers from "./reducers/watchlistReducers";
 
-export default createStore(rootReducer, undefined);
+const rootReducer = combineReducers({ userReducers, watchlistReducers });
+
+export default createStore(userReducers);
