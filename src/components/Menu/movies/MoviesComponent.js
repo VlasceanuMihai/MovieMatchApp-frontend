@@ -40,7 +40,7 @@ const MoviesComponent = () => {
 
   return (
     <Page className={classes.root} title="Movies">
-      <Container maxWidth={false}>
+      <Container maxWidth={false} fixed>
         <Toolbar />
         <Box mt={3}>
           {movieError !== null && <div>{movieError}</div>}

@@ -28,7 +28,7 @@ const items = [
     title: "Dashboard",
   },
   {
-    href: "/myMovies",
+    href: "/watchlist",
     icon: FilmIcon,
     title: "Watchlist",
   },

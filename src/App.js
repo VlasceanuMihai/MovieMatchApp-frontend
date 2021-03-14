@@ -1,11 +1,6 @@
 import "./App.css";
 import React from "react";
-import {
-  Redirect,
-  Route,
-  Switch,
-  withRouter,
-} from "react-router-dom";
+import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import SignUpComponent from "./components/auth/SignUpComponent";
 import LoginComponent from "./components/auth/LoginComponent";
 import ErrorComponent from "./components/error-handler/ErrorComponent";
@@ -15,12 +10,13 @@ import SettingsComponent from "./components/menu/settings/SettingsComponent";
 import MoviesComponent from "./components/menu/movies/MoviesComponent";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import DashboardComponent from "./components/menu/dashboard/DashboardComponent";
+import WatchlistComponent from "./components/menu/watchlist/WatchlistComponent";
 
 const App = withRouter(({ location }) => {
   return (
     <div className="App">
       <Switch>
-        <Route exact path="/404" component={ErrorComponent} />
+                <Route exact path="/404" component={ErrorComponent} />
         <Route>
           {location.pathname !== `/login` &&
             location.pathname !== `/` &&
@@ -35,6 +31,11 @@ const App = withRouter(({ location }) => {
               path="/dashboard"
               exact
               component={DashboardComponent}
+            />
+            <AuthenticatedRoute
+              path="/watchlist"
+              exact
+              component={WatchlistComponent}
             />
             <AuthenticatedRoute
               path="/movies"
