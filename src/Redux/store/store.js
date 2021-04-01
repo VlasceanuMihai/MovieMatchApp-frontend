@@ -1,6 +1,6 @@
 import { createStore, combineReducers } from "redux";
-import userReducers from "./reducers/userReducers";
-import watchlistReducers from "./reducers/watchlistReducers";
+import userReducers from "../reducers/userReducers";
+import watchlistReducers from "../reducers/watchlistReducers";
 
 const rootReducer = combineReducers({ userReducers, watchlistReducers });
 
