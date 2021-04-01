@@ -85,6 +85,7 @@ const WatchlistComponent = ({ className, ...rest }) => {
         console.log(response.data);
         setMovies(response.data);
       })
+      
       .catch((error) => {
         console.log(error);
       });
