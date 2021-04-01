@@ -6,7 +6,7 @@ import {
   executeAuthenticationApi,
   profileApi,
   getWatchlistApi,
-} from "../../apis/Endpoints";
+} from "../../api/Endpoints";
 
 const USER_TOKEN = "user_token";
 

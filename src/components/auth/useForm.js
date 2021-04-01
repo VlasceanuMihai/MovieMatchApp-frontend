@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { signUpApi } from "../../apis/Endpoints";
+import { signUpApi } from "../../api/Endpoints";
 import { useHistory } from "react-router-dom";
 import validateForm from "../../validations/SignUpFormValidationRules";
 import AuthenticationService from "./AuthenticationService";

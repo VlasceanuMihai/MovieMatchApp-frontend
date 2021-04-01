@@ -1,4 +1,4 @@
-import { WATCHLIST } from "../../reduxx/actions/watchlistActions";
+import { WATCHLIST } from "../actions/watchlistActions";
 
 const initialState = {
   watchlist: [],

@@ -1,4 +1,4 @@
-import { SET_PROFILE, LOGOUT_RESET } from "../../reduxx/actions/userActions";
+import { SET_PROFILE, LOGOUT_RESET } from "../../redux/actions/userActions";
 
 const initialState = {
   userProfile: {},

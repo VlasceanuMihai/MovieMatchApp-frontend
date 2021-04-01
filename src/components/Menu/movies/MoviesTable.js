@@ -18,7 +18,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { utils } from "../../../utils/utils";
-import { addMovieApi } from "../../../apis/Endpoints";
+import { addMovieApi } from "../../../api/Endpoints";
 
 const useStyles = makeStyles((theme) => ({
   root: {},

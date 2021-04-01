@@ -4,7 +4,7 @@ import { Box, Container, makeStyles } from "@material-ui/core";
 import Page from "../../../utils/Page";
 import MoviesTable from "./MoviesTable";
 import Toolbar from "./Toolbar";
-import { getMoviesApi } from "../../../apis/Endpoints";
+import { getMoviesApi } from "../../../api/Endpoints";
 import AuthenticationService from "../../auth/AuthenticationService";
 
 const useStyles = makeStyles((theme) => ({
