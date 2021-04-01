@@ -6,11 +6,11 @@ import LoginComponent from "./components/auth/LoginComponent";
 import ErrorComponent from "./components/error-handler/ErrorComponent";
 import AuthenticatedRoute from "./components/auth/AuthenticatedRoute";
 import DashboardLayout from "./layouts/dasboardLayout/DashboardLayout";
-import SettingsComponent from "./components/menu/settings/SettingsComponent";
-import MoviesComponent from "./components/menu/movies/MoviesComponent";
+import SettingsComponent from "./components/meniu/settings/SettingsComponent";
+import MoviesComponent from "./components/meniu/movies/MoviesComponent";
 import "react-perfect-scrollbar/dist/css/styles.css";
-import DashboardComponent from "./components/menu/dashboard/DashboardComponent";
-import WatchlistComponent from "./components/menu/watchlist/WatchlistComponent";
+import DashboardComponent from "./components/meniu/dashboard/DashboardComponent";
+import WatchlistComponent from "./components/meniu/watchlist/WatchlistComponent";
 
 const App = withRouter(({ location }) => {
   return (
